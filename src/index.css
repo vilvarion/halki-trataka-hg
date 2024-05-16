@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.app {
+    background: radial-gradient(#333333, #000000);
+    color: white;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heartbeat {
+    width: max(.9vw, 10px);
+    height: max(.9vw, 10px);
+    background-color: #91f356;
+    border-radius: 50%;
+    animation: heartbeat 1.5s infinite;
+
+  svg {
+    width: 100%;
+  }
+}
+
+@keyframes heartbeat {
+    0% {transform: scale(1);}
+    14% {transform: scale(1.1);}
+    28% {transform: scale(1);}
+    42% {transform: scale(1.1);}
+    70% {transform: scale(1);}
+}
