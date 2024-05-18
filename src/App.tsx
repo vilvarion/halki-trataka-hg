@@ -1,14 +1,12 @@
 import React from 'react';
-import Heart from "./Heart";
-import Debug from "./Debug";
+import Debug from "./components/Debug";
+import ConcentrationScreen from "./screens/ConcentrationScreen";
 
 function App() {
   return (
     <main className="app">
       <Debug/>
-
-
-      <Heart/>
+      <ConcentrationScreen/>
     </main>
   );
 }

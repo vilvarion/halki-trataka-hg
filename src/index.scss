@@ -17,22 +17,13 @@ body {
     justify-content: center;
 }
 
-.heartbeat {
-    width: max(.9vw, 10px);
-    height: max(.9vw, 10px);
-    background-color: #91f356;
-    border-radius: 50%;
-    animation: heartbeat 1.5s infinite;
 
-  svg {
-    width: 100%;
-  }
-}
-
-@keyframes heartbeat {
-    0% {transform: scale(1);}
-    14% {transform: scale(1.1);}
-    28% {transform: scale(1);}
-    42% {transform: scale(1.1);}
-    70% {transform: scale(1);}
+.webcam {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    z-index: 100;
 }

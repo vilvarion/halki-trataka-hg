@@ -1,0 +1,34 @@
+
+.heartbeat {
+  width: max(.9vw, 10px);
+  height: max(.9vw, 10px);
+  background-color: #80ea45;
+  border-radius: 50%;
+  box-shadow: 0 0 15px 3px rgba(0,0,0, .4);
+  animation-name: heartbeat;
+  animation-iteration-count: infinite;
+  z-index: 2;
+  position: relative;
+
+  svg {
+    width: 100%;
+  }
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.1);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
