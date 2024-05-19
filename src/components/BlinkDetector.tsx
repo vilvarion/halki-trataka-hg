@@ -4,6 +4,7 @@ import {delay} from "../utils/animation";
 import {FaceLandmarker, FilesetResolver, DrawingUtils} from '@mediapipe/tasks-vision';
 import {webcamAllowed} from "../utils/browser";
 import detectBlink from "../utils/eyeDetection";
+import "./BlinkDetector.scss";
 
 export default function BlinkDetector () {
   const drawingRef = useRef<DrawingUtils | null>(null);
@@ -17,6 +18,7 @@ export default function BlinkDetector () {
   const [faceDetected, setFaceDetected] = useState(false);
   const [leftEyeOpen, setLeftEyeOpen] = useState(false);
   const [rightEyeOpen, setRightEyeOpen] = useState(false);
+
 
 
   useEffect(() => {

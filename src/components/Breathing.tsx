@@ -1,9 +1,9 @@
-import {useConfig} from "../state";
+import {useAppState} from "../appState";
 import "./Breathing.scss";
 import { motion } from "framer-motion"
 
 export default function Breathing() {
-  const {breathingRate} = useConfig();
+  const {breathingRate} = useAppState();
 
 
 

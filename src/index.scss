@@ -16,26 +16,3 @@ body {
     align-items: center;
     justify-content: center;
 }
-
-.webcam {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 640px;
-    height: 480px;
-    //object-fit: cover;
-    z-index: 100;
-    transform: scaleX(-1);
-}
-.output_canvas {
-    outline: 1px solid red;
-    z-index: 200;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 640px;
-    height: 480px;
-    transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg);
-    -moz-transform: rotateY(180deg);
-}

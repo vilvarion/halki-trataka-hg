@@ -10,11 +10,11 @@ export default function detectBlink (faceBlendshapes: Classifications) {
   const leftScore = targetCategories.find((category: Category) => category.categoryName === targetShapes[0])!.score;
   const rightScore = targetCategories.find((category: Category) => category.categoryName === targetShapes[1])!.score;
 
-
+  const leftBlink = leftScore > detectionThreshold;
+  const rightBlink = rightScore > detectionThreshold;
 
   return {
-    blink: leftScore+rightScore > detectionThreshold * 2,
-    leftBlink: leftScore > detectionThreshold,
-    rightBlink: rightScore > detectionThreshold
+    blink: leftBlink || rightBlink,
+    leftBlink, rightBlink
   }
 }
