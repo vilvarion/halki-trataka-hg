@@ -1,21 +1,24 @@
-import React, {useState} from 'react';
 import Debug from "./components/Debug";
 import MeditationScreen from "./screens/MeditationScreen";
-import BlinkDetector from "./components/BlinkDetector";
 import TitleScreen from "./screens/TitleScreen";
+import {useProgressState} from "./appProgressState";
+import ConfigScreen from "./screens/ConfigScreen";
+import {AnimatePresence } from "framer-motion";
 
 function AppManager() {
+  const {screen} = useProgressState();
 
-  const [screen, setScreen] = useState("title");
   return (
     <main className="app">
       <Debug/>
       {/*<BlinkDetector />*/}
       {/*<ConcentrationScreen/>*/}
 
-      {screen === "title" && (<TitleScreen/>)}
-
-      {screen === "meditation" && <MeditationScreen/>}
+      <AnimatePresence>
+        {screen === "title" && (<TitleScreen/>)}
+        {screen === "config" && (<ConfigScreen/>)}
+        {screen === "meditation" && <MeditationScreen/>}
+      </AnimatePresence>
     </main>
   );
 }

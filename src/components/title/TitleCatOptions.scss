@@ -1,4 +1,20 @@
 .title-cat-options {
-  outline: 1px solid blue;
 
+
+  .__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+    margin: 1rem 0;
+
+    label {
+      text-align: right;
+      color: var(--silver);
+    }
+    select {
+      background-color: var(--grey);
+      border: 0;
+      color: var(--highlight);
+    }
+  }
 }

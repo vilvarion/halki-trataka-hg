@@ -1,0 +1,80 @@
+.config-screen {
+  min-width: 640px;
+  h2 {
+    font-size: 6rem;
+    line-height: 1;
+    text-align: center;
+    margin: 0;
+    color: var(--pink);
+    font-family: var(--pixel-font);
+    text-shadow: 3px 3px 0px var(--dark-blue);
+  }
+
+  text-align: center;
+}
+
+
+.config-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 2rem 0 3rem;
+  text-align: left;
+}
+
+.config-item {
+  margin: 1rem 0;
+  cursor: pointer;
+  color: var(--silver);
+
+  input {
+    visibility: hidden;
+  }
+
+  .__checkbox {
+    color: var(--grey);
+    margin-right: 1rem;
+    font-size: 2rem;
+    font-family: var(--pixel-font);
+  }
+
+  .__name {
+    font-size: 2rem;
+    font-family: var(--pixel-font);
+  }
+  i {
+    font-style: normal;
+    display: block;
+    position: relative;
+    left: 2rem;
+    margin-top: .25rem;
+    white-space: pre-wrap;
+  }
+
+  &.--active {
+    color: white;
+
+    .__checkbox {
+      color: var(--pink);
+    }
+  }
+}
+
+.config-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.config-nav {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.config-text {
+  font-size: 1.2rem;
+  line-height: 1.5;
+}

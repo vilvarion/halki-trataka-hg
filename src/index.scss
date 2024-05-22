@@ -1,3 +1,23 @@
+@font-face {
+    font-family: 'Halki pixel';
+    src: url('./font/editundobrk-rwav-webfont.woff2') format('woff2'),
+    url('./font/editundobrk-rwav-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+:root {
+    --primary: #00DEE9;
+    --highlight: #91FBFF;
+    --medium-blue: #009aa3;
+    --dark-blue: #006c73;
+    --grey: #565656;
+    --silver: #C0C0C0;
+    --purple: #541E80;
+    --pink: #ffa5fb;
+
+    --pixel-font: 'Halki pixel', sans-serif;
+}
+
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -8,11 +28,17 @@ body {
 }
 
 .app {
-    background: radial-gradient(#333333, #000000);
+    background: radial-gradient(#393939, #000000);
     color: white;
     height: 100vh;
     width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+img {
+    image-rendering: pixelated;
+    pointer-events: none;
+    transform: scale(1.1);
 }
