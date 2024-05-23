@@ -143,3 +143,27 @@
     font-family: var(--pixel-font);
   }
 }
+.focusing-failed {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  background-color: var(--grey);
+  padding: 1rem;
+  z-index: 5000;
+  width: 600px;
+
+  .__blinked {
+    color: var(--pink);
+    font-size: 4rem;
+    margin: 2rem 0;
+    font-family: var(--pixel-font);
+  }
+
+  .__buttons {
+    display: flex;
+    justify-content: space-between;
+
+
+  }
+}

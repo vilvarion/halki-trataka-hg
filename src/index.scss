@@ -58,3 +58,12 @@ img {
     pointer-events: none;
     transform: scale(1.1);
 }
+
+.appver {
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+    font-size: 14px;
+    color: #ffffff;
+    opacity: .5;
+}

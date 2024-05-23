@@ -4,13 +4,14 @@ import Button from "../components/ui/Button";
 import {useProgressState} from "../components/state/appProgressState";
 import {motion} from "framer-motion";
 import {screenAnimTransition, screenReducedTransiton} from "../utils/animation";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import BlinkDetector from "../components/BlinkDetector";
 import BlinkUI from "../components/BlinkUI";
 import Heart from "../components/Heart";
 import CameraTextGuide from "../components/CameraTextGuide";
 import {IFaceState} from "../types/global";
 import HeartAndBreath from "../components/HeartAndBreath";
+import FailedPopup from "../components/FailedPopup";
 
 export default function FocusingScreen() {
   const {screen, setProgress} = useProgressState();
@@ -22,6 +23,16 @@ export default function FocusingScreen() {
 
   const [faceState, setFaceState] = useState<IFaceState>({faceDetected: false, leftEyeOpen: false, rightEyeOpen: false});
 
+  const [failed, setFailed] = useState<boolean>(false);
+  const [safePeriod, setSafePeriod] = useState<boolean>(true);
+
+  useEffect(() => {
+    if(safePeriod) return;
+    if(useEyeTracking && (!faceState.faceDetected || faceState.leftEyeOpen || faceState.rightEyeOpen)) {
+      setFailed(true);
+    }
+  }, [faceState]);
+
   return (
     <motion.main className={'focusing-screen'}
                  transition={useCalmMode ? screenReducedTransiton : screenAnimTransition}
@@ -29,10 +40,7 @@ export default function FocusingScreen() {
                  animate={{opacity: 1, scale: 1}}
                  exit={{opacity: 0, scale: 1.2}}>
 
-
-
       {useEyeTracking && <BlinkDetector onReady={() => setCameraReady(true)} onStateChange={setFaceState}/>}
-      {/*<BlinkUI state={faceState} />*/}
 
       {!isStarted && (
         <>
@@ -46,7 +54,9 @@ export default function FocusingScreen() {
 
       {isStarted ?
         <>
-          <HeartAndBreath/>
+          <HeartAndBreath paused={failed} safePeriodOver={() => setSafePeriod(false)}/>
+
+          {failed && <FailedPopup onRetry={()=> setStarted(false)} onContinue={() => setFailed(false)}/>}
         </>
         :
         <section className={'focusing-preparation'}>

@@ -7,6 +7,7 @@ import {useEffect} from "react";
 import {useSaveState} from "./components/state/appSaveState";
 import FocusingScreen from "./screens/FocusingScreen";
 import FinishScreen from "./screens/FinishScreen";
+import packageJson from '../package.json';
 
 function AppManager() {
   const {screen} = useProgressState();
@@ -21,6 +22,9 @@ function AppManager() {
 
   return (
     <main className={`app ${useCalmMode ? '--calm-mode' : ''} ${screen !== 'title'?'--overflow-hidden':''}`}>
+
+      <div className="appver">Ver: {packageJson.version}</div>
+
       <AnimatePresence>
         {screen === "title" && (<TitleScreen/>)}
         {screen === "config" && (<ConfigScreen/>)}
