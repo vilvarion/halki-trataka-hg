@@ -29,11 +29,15 @@ export default function TitleScreen() {
       <section className={'title-center'}>
         <div>
           <div className="title-menu">
+            <p className={'title-text'}>One point gazing meditation<br/>for beginners.</p>
+
             <p className={'title-text'}>Strengthen your focus by helping <br/> {catName} the cat
               fill {txtPronoun3[catPronoun]}!</p>
-            <Button type={"primary"} size={"big"} onClick={() => setProgress({screen: "focusing"})} sub={`With default / last config`}>START</Button>
+            <Button type={"primary"} size={"big"} onClick={() => setProgress({screen: "focusing"})}
+                    sub={`With default / last config`}>START</Button>
             <br/>
-            <Button type={"secondary"} sub={`experience`} onClick={() => setProgress({screen: "config"})}>CUSTOMIZE</Button>
+            <Button type={"secondary"} sub={`experience`}
+                    onClick={() => setProgress({screen: "config"})}>CUSTOMIZE</Button>
           </div>
         </div>
         <div>
