@@ -3,12 +3,15 @@ import Breathing from "./Breathing";
 import {useAnimationFrame} from "framer-motion";
 import {useRef, useState} from "react";
 import {useSaveState} from "./state/appSaveState";
+import {useProgressState} from "./state/appProgressState";
+import Button from "./ui/Button";
 
 export default function HeartAndBreath() {
   const timeRef = useRef<number>(0);
   const {length, useBreathingGuide} = useSaveState();
   const [heartStep, setHeartStep] = useState<number>(1);
 
+  const {setProgress} = useProgressState();
   const [pause, setPause] = useState<boolean>(false);
 
 
@@ -22,7 +25,8 @@ export default function HeartAndBreath() {
     }
 
     if(elapsedSecond >= length) {
-      // finish!
+      setProgress({screen: "finish"});
+
     } else {
       setHeartStep(newStep);
     }
@@ -31,9 +35,15 @@ export default function HeartAndBreath() {
   });
 
   return (
-    <div className={"focusing-heart"}>
-      <Heart step={heartStep}/>
-      {useBreathingGuide && <Breathing />}
-    </div>
+    <>
+      <div className="focusing-cancel">
+        {timeRef.current} / {length}
+        <button onClick={() => setProgress({screen: "title"})}>Cancel</button>
+      </div>
+      <div className={"focusing-heart"}>
+        <Heart step={heartStep}/>
+        {useBreathingGuide && <Breathing/>}
+      </div>
+    </>
   )
 }

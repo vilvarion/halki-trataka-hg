@@ -1,30 +1,35 @@
-import './ConfigScreen.scss';
+import './FinishScreen.scss';
 import {useSaveState} from "../components/state/appSaveState";
 import Button from "../components/ui/Button";
 import {useProgressState} from "../components/state/appProgressState";
-import ConfigOption from "../components/config/ConfigOption";
 import { motion } from "framer-motion";
 import {screenAnimTransition, screenReducedTransiton} from "../utils/animation";
 
-export default function FinishScreen() {
+  export default function FinishScreen() {
   const {screen, setProgress} = useProgressState();
-  const {useEyeTracking, useBreathingGuide, useTextGuide, useCalmMode, setState} = useSaveState();
+  const {useEyeTracking, catName, useBreathingGuide, useTextGuide, useCalmMode, setState} = useSaveState();
 
   return (
     <motion.main className={'finish-screen'}
                  transition={useCalmMode ? screenReducedTransiton : screenAnimTransition}
-                 initial={{ opacity: 0, x: "30%"}}
-                 animate={{ opacity: 1, x: "0%" }}
-                 exit={{ opacity: 0, x: "30%" }}>
+                 initial={{ opacity: 0, scale: 2}}
+                 animate={{ opacity: 1, scale: 1 }}
+                 exit={{ opacity: 0, scale: 1.5 }}>
 
-      <h2>Config</h2>
+      <h2>Success!</h2>
 
       <section className={'finish-center'}>
 
-        <nav className="finish-nav">
-          <Button type={"secondary"} onClick={() => setProgress({screen: "title"})}>I'm awesome, back to title</Button>
-        </nav>
+        <img src="/sprites/halki-loaf.png" style={{width: 240}}/>
+
+
+        <div className={"finish-wrapper"}>
+          <div className="finish-speech">{catName}: - Thank you, human! Love nya!</div>
+          <div className="finish-result">You did great! {catName} is content, happy and loaf!</div>
+        </div>
+
+        <Button type={"primary"} onClick={() => setProgress({screen: "title"})}>I'm awesome, back to title</Button>
       </section>
     </motion.main>
   )
-}
+  }

@@ -38,7 +38,7 @@ export const useSaveState = create<HalkiSaveState>()(
       blinkSensitivity: 0.4,
 
       catName: "Halki",
-      catPronoun: 2,
+      catPronoun: 0,
       catPattern: "black",
 
       setState: (newState: Partial<HalkiSaveState>) => set((state: HalkiSaveState) => ({...state, ...newState})),

@@ -125,3 +125,21 @@
   top: 49%;
   transform: translate(-50%, -50%);
 }
+.focusing-cancel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  button {
+    background-color: var(--grey);
+    color: white;
+    margin-left: 10px;
+    font-size: 1.2rem;
+    padding: .5rem 1rem;
+    border: none;
+    cursor: pointer;
+    font-family: var(--pixel-font);
+  }
+}

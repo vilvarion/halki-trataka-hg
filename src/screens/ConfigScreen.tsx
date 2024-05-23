@@ -40,7 +40,7 @@ export default function ConfigScreen() {
           <ConfigOption value={useCalmMode}
                         onChange={value => setState({useCalmMode: value})}
                         label={`Calm mode`}
-                        text={`Reduced animation and less color intensity`} />
+                        text={`Reduced animation and lesser color intensity`} />
 
         </div>
 

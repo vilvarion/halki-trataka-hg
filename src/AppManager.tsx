@@ -1,5 +1,4 @@
 import Debug from "./components/Debug";
-import MeditationScreen from "./screens/MeditationScreen";
 import TitleScreen from "./screens/TitleScreen";
 import {useProgressState} from "./components/state/appProgressState";
 import ConfigScreen from "./screens/ConfigScreen";
@@ -7,6 +6,7 @@ import {AnimatePresence } from "framer-motion";
 import {useEffect} from "react";
 import {useSaveState} from "./components/state/appSaveState";
 import FocusingScreen from "./screens/FocusingScreen";
+import FinishScreen from "./screens/FinishScreen";
 
 function AppManager() {
   const {screen} = useProgressState();
@@ -21,14 +21,11 @@ function AppManager() {
 
   return (
     <main className={`app ${useCalmMode ? '--calm-mode' : ''} ${screen !== 'title'?'--overflow-hidden':''}`}>
-      <Debug/>
-      {/*<BlinkDetector />*/}
-      {/*<ConcentrationScreen/>*/}
-
       <AnimatePresence>
         {screen === "title" && (<TitleScreen/>)}
         {screen === "config" && (<ConfigScreen/>)}
         {screen === "focusing" && <FocusingScreen/>}
+        {screen === "finish" && <FinishScreen/>}
       </AnimatePresence>
     </main>
   );

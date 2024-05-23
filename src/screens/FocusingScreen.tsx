@@ -45,10 +45,12 @@ export default function FocusingScreen() {
       )}
 
       {isStarted ?
-        <HeartAndBreath />
+        <>
+          <HeartAndBreath/>
+        </>
         :
         <section className={'focusing-preparation'}>
-          {useEyeTracking && <CameraTextGuide isCameraReady={isCameraReady}/>}
+      {useEyeTracking && <CameraTextGuide isCameraReady={isCameraReady}/>}
 
           <div className="focusing-goals">
             <div className={'__title'}>Quick guide!</div>
