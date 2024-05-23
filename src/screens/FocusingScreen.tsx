@@ -33,6 +33,12 @@ export default function FocusingScreen() {
     }
   }, [faceState]);
 
+  const handleRetry = () => {
+    setStarted(false);
+    setFailed(false);
+    setSafePeriod(true);
+  }
+
   return (
     <motion.main className={'focusing-screen'}
                  transition={useCalmMode ? screenReducedTransiton : screenAnimTransition}
@@ -56,7 +62,7 @@ export default function FocusingScreen() {
         <>
           <HeartAndBreath paused={failed} safePeriodOver={() => setSafePeriod(false)}/>
 
-          {failed && <FailedPopup onRetry={()=> setStarted(false)} onContinue={() => setFailed(false)}/>}
+          {failed && <FailedPopup onRetry={handleRetry} onContinue={() => setFailed(false)}/>}
         </>
         :
         <section className={'focusing-preparation'}>

@@ -9,17 +9,20 @@ export default function HeartAndBreath({paused, safePeriodOver}: { paused: boole
   const [seconds, setSeconds] = useState<number>(0);
   const {length, useBreathingGuide} = useSaveState();
   const [heartStep, setHeartStep] = useState<number>(1);
+  const timeRef = useRef<number>(0);
 
   const {setProgress} = useProgressState();
 
   useAnimationFrame((time, delta) => {
-    const elapsedSecond = Math.round(time / 1000);
-    const newStep = Math.min(6, Math.floor((elapsedSecond - 5) / length * 6) + 1);
 
     if(!paused) {
-      console.log("elapsedSecond", elapsedSecond, newStep)
+      timeRef.current += delta;
+      const elapsedSecond = Math.round(timeRef.current / 1000);
+      const newStep = Math.min(6, Math.floor((elapsedSecond - 5) / length * 6) + 1);
+
       setSeconds(elapsedSecond);
       setHeartStep(newStep);
+      console.log(time, timeRef.current, delta, elapsedSecond);
     }
   });
 
