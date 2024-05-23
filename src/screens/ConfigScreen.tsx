@@ -25,7 +25,7 @@ export default function ConfigScreen() {
           <ConfigOption value={useEyeTracking}
                         onChange={value => setState({useEyeTracking: value})}
                         label={`Use camera tracking`}
-                        text={"Your frontal/web camera will be used to track\n if you have blinked during the session"} />
+                        text={"Your frontal/web camera will be used to track\n you have blinked during the session"} />
 
           <ConfigOption value={useBreathingGuide}
                         onChange={value => setState({useBreathingGuide: value})}

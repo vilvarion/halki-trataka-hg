@@ -29,7 +29,7 @@ export default function TitleScreen() {
       <section className={'title-center'}>
         <div>
           <div className="title-menu">
-            <p className={'title-text'}>One point gazing meditation<br/>for beginners.</p>
+            <p className={'title-text'}>Fixed point gazing meditation<br/>for beginners.</p>
 
             <p className={'title-text'}>Strengthen your focus by helping <br/> {catName} the cat
               fill {txtPronoun3[catPronoun]}!</p>

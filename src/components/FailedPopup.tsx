@@ -15,7 +15,7 @@ export default function FailedPopup({onContinue, onRetry}: {onContinue: () => vo
 
 
         <div className="__buttons">
-          <Button type={"secondary"} onClick={onContinue} sub={"continue"}>No, I'm not!</Button>
+          <Button type={"secondary"} onClick={onContinue} sub={"continue"}>No, I've not!</Button>
           <Button type={"primary"} onClick={onRetry} sub={"go back and prep for next try"}>Retry</Button>
         </div>
       </div>

@@ -1,6 +1,8 @@
-# Halki - one point gazing + breathing app
+# Halki - fixed point gazing + breathing app
 
-### Made for HeathyGamer GG community Hackathon. Mayke-it 2024
+### Made by Vilvarion for HeathyGamer GG community Hackathon. MAYke-it 2024
+
+### Live demo: [https://halki.app](https://halki.app/)
 
 How to run on local:
 ```
@@ -8,7 +10,7 @@ yarn install
 yarn start
 
 will open http://localhost:3000
-in the default browser
+in your default browser
 ```
 
 
