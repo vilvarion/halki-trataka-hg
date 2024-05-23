@@ -42,7 +42,6 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not ie",
       "not op_mini all"
     ],
     "development": [
