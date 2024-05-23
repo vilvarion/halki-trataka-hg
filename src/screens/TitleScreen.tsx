@@ -1,21 +1,17 @@
 import './TitleScreen.scss';
-import {useSaveState} from "../appSaveState";
+import {useSaveState} from "../components/state/appSaveState";
 import {txtCatNames, txtPatternDropdown, txtPronoun2, txtPronoun3, txtPronounDropdown} from "../utils/lang";
 import {TCatPattern} from "../types/global";
 import TitleCatOptions from "../components/title/TitleCatOptions";
 import Button from "../components/ui/Button";
-import {useProgressState} from "../appProgressState";
+import {useProgressState} from "../components/state/appProgressState";
 import { motion } from "framer-motion";
-import {screenAnimTransition} from "../utils/animation";
+import {screenAnimTransition, screenReducedTransiton} from "../utils/animation";
 import {useEffect} from "react";
 
 export default function TitleScreen() {
   const {isReady, screen, setProgress} = useProgressState();
-  const {catName, catPronoun, useEyeTracking, useBreathingGuide, useTextGuide, setState} = useSaveState();
-
-  const handleStart = () => {
-    setProgress({screen: useEyeTracking ? "camera" : "meditation"});
-  }
+  const {catName, catPronoun, useEyeTracking, useCalmMode, useBreathingGuide, useTextGuide, setState} = useSaveState();
 
   useEffect(() => {
     setProgress({isReady: true});
@@ -23,7 +19,7 @@ export default function TitleScreen() {
 
   return (
     <motion.main className={'title-screen'}
-                 transition={screenAnimTransition}
+                 transition={useCalmMode ? screenReducedTransiton : screenAnimTransition}
                  initial={{ opacity: 0, x: isReady ? "-30%" : "0%"}}
                  animate={{ opacity: 1, x: "0%" }}
                  exit={{ opacity: 0, x: "-30%" }}>
@@ -35,7 +31,7 @@ export default function TitleScreen() {
           <div className="title-menu">
             <p className={'title-text'}>Strengthen your focus by helping <br/> {catName} the cat
               fill {txtPronoun3[catPronoun]}!</p>
-            <Button type={"primary"} size={"big"} onClick={handleStart} sub={`With default / last config`}>START</Button>
+            <Button type={"primary"} size={"big"} onClick={() => setProgress({screen: "focusing"})} sub={`With default / last config`}>START</Button>
             <br/>
             <Button type={"secondary"} sub={`experience`} onClick={() => setProgress({screen: "config"})}>CUSTOMIZE</Button>
           </div>

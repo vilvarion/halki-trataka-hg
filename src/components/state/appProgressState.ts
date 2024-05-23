@@ -1,6 +1,6 @@
 import {create} from "zustand";
 
-export type TScreen = "title" | "config" | "camera" | "meditation"
+export type TScreen = "title" | "config" | "focusing" | "finish"
 interface ProgressState {
   isReady: boolean
   screen: TScreen

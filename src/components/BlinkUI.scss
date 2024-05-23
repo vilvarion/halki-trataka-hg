@@ -1,0 +1,61 @@
+
+.blinkui-headbase {
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  width: 75px;
+  height: 75px;
+  background-image: url("../sprites/halki-head.png");
+  image-rendering: pixelated;
+  //background-size: 200%;
+  background-position: 0 0;
+  transform: scale(4);
+  transform-origin: 50% 85%;
+  opacity: .35;
+  filter: saturate(0);
+  transition: opacity .2s, filter .2s;
+  &.--active {
+    opacity: 1;
+    filter: saturate(1);
+  }
+}
+.blinkui-inactive, .blinkui-hint, .blinkui-nocamera {
+  font-size: 5px;
+  position: absolute;
+  top: -5px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--pixel-font);
+  color: var(--pink);
+}
+
+.blinkui-nocamera {
+  color: var(--grey);
+}
+
+.blinkui-eye {
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  background-image: url("../sprites/halki-head.png");
+  image-rendering: pixelated;
+
+  &.--left-open {
+    z-index: 2;
+    background-position: -75px 0;
+  }
+  &.--left-closed {
+    z-index: 3;
+    background-position: -225px 0;
+  }
+
+  &.--right-open {
+    z-index: 4;
+    background-position: -150px 0;
+  }
+  &.--right-closed {
+    z-index: 5;
+    background-position: -300px 0;
+  }
+}

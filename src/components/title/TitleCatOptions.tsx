@@ -1,6 +1,6 @@
 import {txtCatNames, txtPatternDropdown, txtPronounDropdown} from "../../utils/lang";
 import {TCatPattern} from "../../types/global";
-import {useSaveState} from "../../appSaveState";
+import {useSaveState} from "../state/appSaveState";
 import './TitleCatOptions.scss';
 
 export default function TitleCatOptions() {

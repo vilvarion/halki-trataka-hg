@@ -1,5 +1,5 @@
 import {create} from 'zustand'
-import {TCatPattern} from "./types/global";
+import {TCatPattern} from "../../types/global";
 import {createJSONStorage, persist} from "zustand/middleware";
 
 interface HalkiSaveState {
@@ -7,6 +7,7 @@ interface HalkiSaveState {
   useFullScreen: boolean
   useBreathingGuide: boolean
   useTextGuide: boolean
+  useCalmMode: boolean
 
   length: number
 
@@ -28,6 +29,7 @@ export const useSaveState = create<HalkiSaveState>()(
       useFullScreen: true,
       useBreathingGuide: true,
       useTextGuide: false,
+      useCalmMode: false,
 
       length: 60,
 

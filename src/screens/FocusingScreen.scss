@@ -1,5 +1,8 @@
-.config-screen {
-  min-width: 640px;
+.focusing-screen {
+  min-width: 680px;
+  text-align: center;
+  align-self: flex-start;
+  margin-top: 240px;
   h2 {
     font-size: 6rem;
     line-height: 1;
@@ -9,12 +12,10 @@
     font-family: var(--pixel-font);
     text-shadow: 3px 3px 0px var(--dark-blue);
   }
-
-  text-align: center;
 }
 
 
-.config-menu {
+.focusing-menu {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -23,7 +24,7 @@
   text-align: left;
 }
 
-.config-item {
+.focusing-item {
   margin: 1rem 0;
   cursor: pointer;
   color: var(--silver);
@@ -37,9 +38,6 @@
     margin-right: 1rem;
     font-size: 2rem;
     font-family: var(--pixel-font);
-    transform: scale(1);
-    display: inline-block;
-    transition: transform .2s ease;
   }
 
   .__name {
@@ -60,25 +58,70 @@
 
     .__checkbox {
       color: var(--pink);
-      transform: scale(1.4);
     }
   }
 }
 
-.config-center {
+.focusing-preparation {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  background-color: rgba(100,100,100,0.9);
+  position: relative;
+  z-index: 20;
+  height: 320px;
+  padding: 1rem;
+  font-size: 1.5rem;
 }
 
-.config-nav {
+.focusing-nav {
   display: flex;
   width: 100%;
   justify-content: space-between;
 }
 
-.config-text {
+.focusing-text {
   font-size: 1.2rem;
   line-height: 1.5;
+}
+
+.focusing-speech {
+  display: block;
+  font-family: var(--pixel-font);
+  color: var(--primary);
+}
+
+.focusing-goals {
+  font-family: var(--pixel-font);
+  text-align: left;
+  margin: 1rem 0;
+
+  .__title {
+    color: var(--pink);
+    font-size: 2rem;
+  }
+  .__goal {
+    margin: .5rem 0;
+
+    b {
+      font-weight: normal;
+      color: var(--primary);
+    }
+    i {
+      font-style: normal;
+      color: var(--pink);
+    }
+  }
+}
+
+
+
+// todo: split screens!
+//=======================
+.focusing-heart {
+  position: fixed;
+  left: 50%;
+  top: 49%;
+  transform: translate(-50%, -50%);
 }

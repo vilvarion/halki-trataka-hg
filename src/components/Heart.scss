@@ -1,34 +1,45 @@
+$scale-min: 1.5;
+$scale-max: 1.6;
 
-.heartbeat {
-  width: max(.9vw, 10px);
-  height: max(.9vw, 10px);
-  background-color: #80ea45;
-  border-radius: 50%;
-  box-shadow: 0 0 15px 3px rgba(0,0,0, .4);
+.heart {
+  display: inline-block;
+  //width: min(1.2vw, 24px);
+  //height: min(1.2vw, 24px);
+
+  width: 24px;
+  height: 24px;
+
   animation-name: heartbeat;
   animation-iteration-count: infinite;
   z-index: 2;
   position: relative;
 
-  svg {
-    width: 100%;
+  background-image: url("../sprites/heart-sprites.png");
+  background-position: -24px 0;
+  transform: scale($scale-min);
+  image-rendering: pixelated;
+
+  @for $i from 1 through 6 {
+    &.--step-#{$i} {
+      background-position: -#{24 * $i}px 0;
+    }
   }
 }
 
 @keyframes heartbeat {
   0% {
-    transform: scale(1);
+    transform: scale($scale-min);
   }
   14% {
-    transform: scale(1.1);
+    transform: scale($scale-max);
   }
   28% {
-    transform: scale(1);
+    transform: scale($scale-min);
   }
   42% {
-    transform: scale(1.1);
+    transform: scale($scale-max);
   }
   70% {
-    transform: scale(1);
+    transform: scale($scale-min);
   }
 }

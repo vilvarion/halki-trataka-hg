@@ -1,24 +1,18 @@
 import './ConfigScreen.scss';
-import {useSaveState} from "../appSaveState";
-import {TCatPattern} from "../types/global";
-import TitleCatOptions from "../components/title/TitleCatOptions";
+import {useSaveState} from "../components/state/appSaveState";
 import Button from "../components/ui/Button";
-import {useProgressState} from "../appProgressState";
+import {useProgressState} from "../components/state/appProgressState";
 import ConfigOption from "../components/config/ConfigOption";
 import { motion } from "framer-motion";
-import {screenAnimTransition} from "../utils/animation";
+import {screenAnimTransition, screenReducedTransiton} from "../utils/animation";
 
 export default function ConfigScreen() {
   const {screen, setProgress} = useProgressState();
-  const {useEyeTracking, useBreathingGuide, useTextGuide, setState} = useSaveState();
-
-  const handleContinue = () => {
-    setProgress({screen: useEyeTracking ? "camera" : "meditation"});
-  }
+  const {useEyeTracking, useBreathingGuide, useTextGuide, useCalmMode, setState} = useSaveState();
 
   return (
     <motion.main className={'config-screen'}
-                 transition={screenAnimTransition}
+                 transition={useCalmMode ? screenReducedTransiton : screenAnimTransition}
                  initial={{ opacity: 0, x: "30%"}}
                  animate={{ opacity: 1, x: "0%" }}
                  exit={{ opacity: 0, x: "30%" }}>
@@ -40,14 +34,19 @@ export default function ConfigScreen() {
 
           <ConfigOption value={useTextGuide}
                         onChange={value => setState({useTextGuide: value})}
-                        label={`Reflective text guiding`}
+                        label={`Reflective guiding`}
                         text={`Guides like: notice your thoughts, observe them, let them go.`} />
+
+          <ConfigOption value={useCalmMode}
+                        onChange={value => setState({useCalmMode: value})}
+                        label={`Calm mode`}
+                        text={`Reduced animation and less color intensity`} />
 
         </div>
 
         <nav className="config-nav">
           <Button type={"secondary"} onClick={() => setProgress({screen: "title"})}>BACK</Button>
-          <Button type={"primary"} onClick={handleContinue}>CONTINUE</Button>
+          <Button type={"primary"} onClick={() => setProgress({screen: "focusing"})}>CONTINUE</Button>
         </nav>
       </section>
     </motion.main>

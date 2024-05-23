@@ -5,12 +5,13 @@ import {FaceLandmarker, FilesetResolver, DrawingUtils} from '@mediapipe/tasks-vi
 import {webcamAllowed} from "../utils/browser";
 import detectBlink from "../utils/eyeDetection";
 import "./BlinkDetector.scss";
+import BlinkUI from "./BlinkUI";
+import {IFaceState} from "../types/global";
 
-export default function BlinkDetector () {
+export default function BlinkDetector ({onReady, onStateChange}: {onReady?: () => void, onStateChange?: (state: IFaceState) => void}) {
   const drawingRef = useRef<DrawingUtils | null>(null);
   const detectorRef = useRef<FaceLandmarker | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const time = useRef<number>(-1);
   const [loading, setLoading] = useState(false);
   const [ready, setReady] = useState(false);
@@ -22,7 +23,11 @@ export default function BlinkDetector () {
 
 
   useEffect(() => {
-    if(webcamAllowed()) startVideo();
+    try {
+      if(webcamAllowed()) startVideo();
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
   // Starting the video stream
@@ -62,16 +67,12 @@ export default function BlinkDetector () {
   const startFaceDetection = async () => {
     await createFaceLandmarker();
     setLoading(false);
-
-    if(canvasRef.current) {
-      const ctx = canvasRef.current.getContext('2d');
-      drawingRef.current = new DrawingUtils(ctx as CanvasRenderingContext2D);
-    }
     setReady(true);
+    onReady && onReady();
   }
 
   const detectionLoop = async () => {
-    if(ready && detectorRef.current && videoRef.current && canvasRef.current) {
+    if(ready && detectorRef.current && videoRef.current) {
       const video = videoRef.current;
       const lastVideoTime = time.current;
       const faceLandmarker = detectorRef.current;
@@ -89,11 +90,10 @@ export default function BlinkDetector () {
           if(leftEyeOpen !== leftBlink) setLeftEyeOpen(leftBlink);
           if(rightEyeOpen !== rightBlink) setRightEyeOpen(rightBlink);
 
-          if(blink) console.log("Blink detected");
+          onStateChange && onStateChange({faceDetected, leftEyeOpen, rightEyeOpen});
 
         } else {
           if(faceDetected) setFaceDetected(false);
-
         }
       }
     }
@@ -104,12 +104,8 @@ export default function BlinkDetector () {
   })
 
   return (
-    <div>
+    <div className={"blink-detector"}>
       <video  ref={videoRef} className={`webcam`} playsInline autoPlay />
-      <canvas ref={canvasRef} className="output_canvas"/>
-      Face detected: {faceDetected.toString()} <br/>
-      Left eye: {leftEyeOpen.toString()} <br/>
-      Right eye: {rightEyeOpen.toString()} <br/>
     </div>
   )
 }
