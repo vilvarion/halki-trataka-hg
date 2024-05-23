@@ -35,7 +35,7 @@ export default function ConfigScreen() {
           <ConfigOption value={useTextGuide}
                         onChange={value => setState({useTextGuide: value})}
                         label={`Reflective guiding`}
-                        text={`Guides like: notice your thoughts, observe them, let them go.`} />
+                        text={`[not yet implemented] Text guiding like: notice your thoughts, observe them, etc`} />
 
           <ConfigOption value={useCalmMode}
                         onChange={value => setState({useCalmMode: value})}
