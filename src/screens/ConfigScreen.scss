@@ -1,5 +1,8 @@
 .config-screen {
-  min-width: 640px;
+  max-width: 640px;
+  padding: 0 2rem;
+  text-align: center;
+
   h2 {
     font-size: 6rem;
     line-height: 1;
@@ -10,7 +13,6 @@
     text-shadow: 3px 3px 0px var(--dark-blue);
   }
 
-  text-align: center;
 }
 
 
@@ -21,12 +23,17 @@
   justify-content: flex-start;
   margin: 1rem 0 2rem;
   text-align: left;
+
+  @media screen and (max-width: 600px) {
+    margin: 0 0 1rem;
+  }
 }
 
 .config-item {
   margin: 1rem 0;
   cursor: pointer;
   color: var(--silver);
+  //outline: 1px solid red;
 
   input {
     visibility: hidden;
@@ -53,6 +60,11 @@
     left: 2rem;
     margin-top: .25rem;
     white-space: pre-wrap;
+
+    @media screen and (max-width: 600px) {
+      white-space: normal;
+      width: 90%;
+    }
   }
 
   &.--active {

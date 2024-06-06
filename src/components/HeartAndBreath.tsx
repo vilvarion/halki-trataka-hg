@@ -22,7 +22,6 @@ export default function HeartAndBreath({paused, safePeriodOver}: { paused: boole
 
       setSeconds(elapsedSecond);
       setHeartStep(newStep);
-      console.log(time, timeRef.current, delta, elapsedSecond);
     }
   });
 

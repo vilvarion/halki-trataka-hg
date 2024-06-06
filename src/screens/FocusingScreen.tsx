@@ -14,8 +14,8 @@ import HeartAndBreath from "../components/HeartAndBreath";
 import FailedPopup from "../components/FailedPopup";
 
 export default function FocusingScreen() {
-  const {screen, setProgress} = useProgressState();
-  const {useEyeTracking, length, useBreathingGuide, useTextGuide, useCalmMode, setState} = useSaveState();
+  const {setProgress} = useProgressState();
+  const {useEyeTracking, length, useCalmMode} = useSaveState();
 
   const [isCameraReady, setCameraReady] = useState<boolean>(!useEyeTracking);
   const [isStarted, setStarted] = useState<boolean>(false);
@@ -69,7 +69,7 @@ export default function FocusingScreen() {
       {useEyeTracking && <CameraTextGuide isCameraReady={isCameraReady}/>}
 
           <div className="focusing-goals">
-            <div className={'__title'}>Quick guide!</div>
+            <div className={'__title'}>Quick guide</div>
             <div className={'__goal'}>1. Look at the heart <Heart step={1}/> in the center of the screen</div>
             <div className={'__goal'}>2. <b>Don't blink!</b> You can slightly move while breathing</div>
             <div className={'__goal'}>3. <b>Synchronize your breathing</b> with the ring around the heart</div>

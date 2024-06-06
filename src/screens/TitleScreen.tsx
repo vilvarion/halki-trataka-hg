@@ -1,7 +1,6 @@
 import './TitleScreen.scss';
 import {useSaveState} from "../components/state/appSaveState";
-import {txtCatNames, txtPatternDropdown, txtPronoun2, txtPronoun3, txtPronounDropdown} from "../utils/lang";
-import {TCatPattern} from "../types/global";
+import {txtPronoun3} from "../utils/lang";
 import TitleCatOptions from "../components/title/TitleCatOptions";
 import Button from "../components/ui/Button";
 import {useProgressState} from "../components/state/appProgressState";
@@ -10,8 +9,8 @@ import {screenAnimTransition, screenReducedTransiton} from "../utils/animation";
 import {useEffect} from "react";
 
 export default function TitleScreen() {
-  const {isReady, screen, setProgress} = useProgressState();
-  const {catName, catPronoun, useEyeTracking, useCalmMode, useBreathingGuide, useTextGuide, setState} = useSaveState();
+  const {isReady, setProgress} = useProgressState();
+  const {catName, catPronoun, useCalmMode} = useSaveState();
 
   useEffect(() => {
     setProgress({isReady: true});
@@ -27,21 +26,20 @@ export default function TitleScreen() {
       <h2>Needs your attention!</h2>
 
       <section className={'title-center'}>
-        <div>
-          <div className="title-menu">
-            <p className={'title-text'}>Fixed point gazing meditation<br/>for beginners.</p>
+        <div className="title-menu">
+          <p className={'title-text'}>Fixed point gazing meditation<br/>for beginners.</p>
+          <p className={'title-text'}>Strengthen your focus by helping <br/> {catName} the cat
+            fill {txtPronoun3[catPronoun]}!</p>
 
-            <p className={'title-text'}>Strengthen your focus by helping <br/> {catName} the cat
-              fill {txtPronoun3[catPronoun]}!</p>
+          <div className={'title-buttons'}>
             <Button type={"primary"} size={"big"} onClick={() => setProgress({screen: "focusing"})}
                     sub={`With default / last config`}>START</Button>
-            <br/>
-            <Button type={"secondary"} sub={`experience`}
+            <Button type={"secondary"} sub={`your experience`}
                     onClick={() => setProgress({screen: "config"})}>CUSTOMIZE</Button>
           </div>
         </div>
         <div>
-          <img src={'/sprites/halki-intro.png'} alt={'cat'}/>
+          <img src={'/sprites/halki-intro.png'} className={`title-halki`} alt={'cat'}/>
           <TitleCatOptions/>
         </div>
       </section>

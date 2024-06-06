@@ -6,8 +6,8 @@ import { motion } from "framer-motion";
 import {screenAnimTransition, screenReducedTransiton} from "../utils/animation";
 
   export default function FinishScreen() {
-  const {screen, setProgress} = useProgressState();
-  const {useEyeTracking, catName, useBreathingGuide, useTextGuide, useCalmMode, setState} = useSaveState();
+  const {setProgress} = useProgressState();
+  const {catName, useCalmMode} = useSaveState();
 
   return (
     <motion.main className={'finish-screen'}
@@ -20,7 +20,7 @@ import {screenAnimTransition, screenReducedTransiton} from "../utils/animation";
 
       <section className={'finish-center'}>
 
-        <img src="/sprites/halki-loaf.png" style={{width: 240}}/>
+        <img src="/sprites/halki-loaf.png" style={{width: 240}} alt={`cat is happy`}/>
 
 
         <div className={"finish-wrapper"}>

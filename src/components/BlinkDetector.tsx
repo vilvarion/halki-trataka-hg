@@ -9,7 +9,7 @@ import BlinkUI from "./BlinkUI";
 import {IFaceState} from "../types/global";
 
 export default function BlinkDetector ({onReady, onStateChange}: {onReady?: () => void, onStateChange?: (state: IFaceState) => void}) {
-  const drawingRef = useRef<DrawingUtils | null>(null);
+  const streamRef = useRef<MediaStream|null>(null);
   const detectorRef = useRef<FaceLandmarker | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const time = useRef<number>(-1);
@@ -28,6 +28,16 @@ export default function BlinkDetector ({onReady, onStateChange}: {onReady?: () =
     } catch (e) {
       console.error(e);
     }
+    return () => {
+      console.log("Closing BlinkDetector");
+      if(detectorRef.current)
+        detectorRef.current.close();
+
+      streamRef.current?.getTracks().forEach(track => track.stop());
+      streamRef.current = null;
+      if(videoRef.current)
+        videoRef.current.srcObject = null;
+    }
   }, []);
 
   // Starting the video stream
@@ -36,13 +46,15 @@ export default function BlinkDetector ({onReady, onStateChange}: {onReady?: () =
       'audio': false,
       'video': { facingMode: 'user' },
     };
-    navigator.mediaDevices.getUserMedia(videoConfig)
-      .then(stream => {
-        if(videoRef.current) {
-          videoRef.current.srcObject = stream;
-          videoRef.current.addEventListener("loadeddata", startFaceDetection);
-        }
-      });
+
+    const stream = await navigator.mediaDevices.getUserMedia(videoConfig);
+    if(streamRef.current) {
+      streamRef.current = stream;
+    }
+    if(videoRef.current) {
+      videoRef.current.srcObject = stream;
+      videoRef.current.addEventListener("loadeddata", startFaceDetection);
+    }
   }
 
   //
