@@ -1,7 +1,11 @@
 import {useSaveState} from "./state/appSaveState";
 import "./Heart.scss";
 
-export default function Heart ({step}: {step?: number}) {
+interface HeartProps {
+  step?: number;
+}
+
+export default function Heart({step}: HeartProps) {
   const {heartRate, useCalmMode} = useSaveState();
 
     return (

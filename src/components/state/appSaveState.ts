@@ -1,6 +1,7 @@
-import {create} from 'zustand'
-import {TCatPattern} from "../../types/global";
-import {createJSONStorage, persist} from "zustand/middleware";
+import {create} from 'zustand';
+import {persist} from "zustand/middleware";
+
+import type {TCatPattern} from "../../types/global";
 
 interface HalkiSaveState {
   useEyeTracking: boolean

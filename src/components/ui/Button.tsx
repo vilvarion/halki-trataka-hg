@@ -1,16 +1,16 @@
 import {ReactElement} from "react";
 import "./Button.scss";
 
-interface props {
-  type: "primary" | "secondary"
-  size?: "big" | "normal"
-  sub?: string,
-  children: string | ReactElement
-  onClick?: () => void
-  disabled?: boolean
+interface ButtonProps {
+  type: "primary" | "secondary";
+  size?: "big" | "normal";
+  sub?: string;
+  children: string | ReactElement;
+  onClick?: () => void;
+  disabled?: boolean;
 }
 
-export default function Button({ type, size = "normal", sub, children, onClick, disabled }: props) {
+export default function Button({ type, size = "normal", sub, children, onClick, disabled }: ButtonProps) {
 
 
   return (

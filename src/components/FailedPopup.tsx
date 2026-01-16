@@ -1,7 +1,13 @@
 import {motion} from "framer-motion";
+
 import Button from "./ui/Button";
 
-export default function FailedPopup({onContinue, onRetry}: {onContinue: () => void, onRetry: () => void}) {
+interface FailedPopupProps {
+  onContinue: () => void;
+  onRetry: () => void;
+}
+
+export default function FailedPopup({onContinue, onRetry}: FailedPopupProps) {
 
   return (
     <motion.div

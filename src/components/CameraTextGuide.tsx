@@ -1,7 +1,11 @@
 import {webcamAllowed} from "../utils/browser";
 import {useSaveState} from "./state/appSaveState";
 
-export default function CameraTextGuide({isCameraReady}: {isCameraReady: boolean}) {
+interface CameraTextGuideProps {
+  isCameraReady: boolean;
+}
+
+export default function CameraTextGuide({isCameraReady}: CameraTextGuideProps) {
 
   const {catName} = useSaveState();
 

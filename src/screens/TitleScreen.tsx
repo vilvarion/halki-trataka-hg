@@ -1,12 +1,13 @@
-import './TitleScreen.scss';
-import {useSaveState} from "../components/state/appSaveState";
-import {txtPronoun3} from "../utils/lang";
-import TitleCatOptions from "../components/title/TitleCatOptions";
-import Button from "../components/ui/Button";
-import {useProgressState} from "../components/state/appProgressState";
-import { motion } from "framer-motion";
-import {screenAnimTransition, screenReducedTransiton} from "../utils/animation";
 import {useEffect} from "react";
+import {motion} from "framer-motion";
+
+import {useProgressState} from "../components/state/appProgressState";
+import {useSaveState} from "../components/state/appSaveState";
+import {screenAnimTransition, screenReducedTransition} from "../utils/animation";
+import {txtPronoun3} from "../utils/lang";
+import Button from "../components/ui/Button";
+import TitleCatOptions from "../components/title/TitleCatOptions";
+import './TitleScreen.scss';
 
 export default function TitleScreen() {
   const {isReady, setProgress} = useProgressState();
@@ -14,11 +15,12 @@ export default function TitleScreen() {
 
   useEffect(() => {
     setProgress({isReady: true});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <motion.main className={'title-screen'}
-                 transition={useCalmMode ? screenReducedTransiton : screenAnimTransition}
+                 transition={useCalmMode ? screenReducedTransition : screenAnimTransition}
                  initial={{ opacity: 0, x: isReady ? "-30%" : "0%"}}
                  animate={{ opacity: 1, x: "0%" }}
                  exit={{ opacity: 0, x: "-30%" }}>

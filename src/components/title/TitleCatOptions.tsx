@@ -1,5 +1,4 @@
-import {txtCatNames, txtPatternDropdown, txtPronounDropdown} from "../../utils/lang";
-import {TCatPattern} from "../../types/global";
+import {txtCatNames, txtPronounDropdown} from "../../utils/lang";
 import {useSaveState} from "../state/appSaveState";
 import './TitleCatOptions.scss';
 
@@ -20,14 +19,6 @@ export default function TitleCatOptions() {
           {txtPronounDropdown.map((name, i) => <option key={name} value={i}>{name}</option>)}
         </select>
       </div>
-      {/*
-      <div className={'__row'}>
-        Pattern:
-        <select onChange={(e) => setState({catPattern: e.target.value as TCatPattern})} value={catPronoun}>
-          {txtPatternDropdown.map((name, i) => <option key={name} value={name}>{name}</option>)}
-        </select>
-      </div>
-      */}
     </div>
   )
 }

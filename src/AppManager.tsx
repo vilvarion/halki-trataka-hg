@@ -1,10 +1,10 @@
-import Debug from "./components/Debug";
-import TitleScreen from "./screens/TitleScreen";
-import {useProgressState} from "./components/state/appProgressState";
-import ConfigScreen from "./screens/ConfigScreen";
-import {AnimatePresence } from "framer-motion";
 import {useEffect} from "react";
+import {AnimatePresence} from "framer-motion";
+
+import {useProgressState} from "./components/state/appProgressState";
 import {useSaveState} from "./components/state/appSaveState";
+import TitleScreen from "./screens/TitleScreen";
+import ConfigScreen from "./screens/ConfigScreen";
 import FocusingScreen from "./screens/FocusingScreen";
 import FinishScreen from "./screens/FinishScreen";
 import packageJson from '../package.json';
@@ -18,6 +18,7 @@ function AppManager() {
     // Turning ON calm mode if user prefers reduced motion
     if (mediaQuery.matches)
       setState({useCalmMode: true});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

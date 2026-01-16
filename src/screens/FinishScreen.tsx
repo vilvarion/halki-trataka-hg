@@ -1,17 +1,18 @@
-import './FinishScreen.scss';
-import {useSaveState} from "../components/state/appSaveState";
-import Button from "../components/ui/Button";
-import {useProgressState} from "../components/state/appProgressState";
-import { motion } from "framer-motion";
-import {screenAnimTransition, screenReducedTransiton} from "../utils/animation";
+import {motion} from "framer-motion";
 
-  export default function FinishScreen() {
+import {useProgressState} from "../components/state/appProgressState";
+import {useSaveState} from "../components/state/appSaveState";
+import {screenAnimTransition, screenReducedTransition} from "../utils/animation";
+import Button from "../components/ui/Button";
+import './FinishScreen.scss';
+
+export default function FinishScreen() {
   const {setProgress} = useProgressState();
   const {catName, useCalmMode} = useSaveState();
 
   return (
     <motion.main className={'finish-screen'}
-                 transition={useCalmMode ? screenReducedTransiton : screenAnimTransition}
+                 transition={useCalmMode ? screenReducedTransition : screenAnimTransition}
                  initial={{ opacity: 0, scale: 2}}
                  animate={{ opacity: 1, scale: 1 }}
                  exit={{ opacity: 0, scale: 1.5 }}>

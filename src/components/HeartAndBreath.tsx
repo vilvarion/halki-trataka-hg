@@ -1,11 +1,17 @@
-import Heart from "./Heart";
-import Breathing from "./Breathing";
-import {useAnimationFrame} from "framer-motion";
 import {useEffect, useRef, useState} from "react";
-import {useSaveState} from "./state/appSaveState";
-import {useProgressState} from "./state/appProgressState";
+import {useAnimationFrame} from "framer-motion";
 
-export default function HeartAndBreath({paused, safePeriodOver}: { paused: boolean, safePeriodOver: () => void}) {
+import {useProgressState} from "./state/appProgressState";
+import {useSaveState} from "./state/appSaveState";
+import Breathing from "./Breathing";
+import Heart from "./Heart";
+
+interface HeartAndBreathProps {
+  paused: boolean;
+  safePeriodOver: () => void;
+}
+
+export default function HeartAndBreath({paused, safePeriodOver}: HeartAndBreathProps) {
   const [seconds, setSeconds] = useState<number>(0);
   const {length, useBreathingGuide} = useSaveState();
   const [heartStep, setHeartStep] = useState<number>(1);
@@ -29,9 +35,10 @@ export default function HeartAndBreath({paused, safePeriodOver}: { paused: boole
     if (seconds >= length) {
       setProgress({screen: "finish"});
     }
-    if(seconds >= 5) {
+    if (seconds >= 5) {
       safePeriodOver();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [seconds]);
 
   return (

@@ -1,9 +1,13 @@
 import "./BlinkUI.scss";
-import {txtCatNames} from "../utils/lang";
 import {useSaveState} from "./state/appSaveState";
 import {IFaceState} from "../types/global";
 
-export default function BlinkUI({state, mode}: {state: IFaceState, mode?:string}) {
+interface BlinkUIProps {
+  state: IFaceState;
+  mode?: string;
+}
+
+export default function BlinkUI({state, mode}: BlinkUIProps) {
   const {catName} = useSaveState();
 
   const {faceDetected, leftEyeOpen, rightEyeOpen} = state;

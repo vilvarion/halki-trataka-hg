@@ -1,37 +1,36 @@
-import './FocusingScreen.scss';
-import {useSaveState} from "../components/state/appSaveState";
-import Button from "../components/ui/Button";
-import {useProgressState} from "../components/state/appProgressState";
-import {motion} from "framer-motion";
-import {screenAnimTransition, screenReducedTransiton} from "../utils/animation";
 import {useEffect, useState} from "react";
+import {motion} from "framer-motion";
+
+import {useProgressState} from "../components/state/appProgressState";
+import {useSaveState} from "../components/state/appSaveState";
+import {screenAnimTransition, screenReducedTransition} from "../utils/animation";
+import type {IFaceState} from "../types/global";
 import BlinkDetector from "../components/BlinkDetector";
 import BlinkUI from "../components/BlinkUI";
-import Heart from "../components/Heart";
+import Button from "../components/ui/Button";
 import CameraTextGuide from "../components/CameraTextGuide";
-import {IFaceState} from "../types/global";
-import HeartAndBreath from "../components/HeartAndBreath";
 import FailedPopup from "../components/FailedPopup";
+import Heart from "../components/Heart";
+import HeartAndBreath from "../components/HeartAndBreath";
+import './FocusingScreen.scss';
 
 export default function FocusingScreen() {
   const {setProgress} = useProgressState();
-  const {useEyeTracking, length, useCalmMode} = useSaveState();
+  const {useEyeTracking, length, useCalmMode, catName} = useSaveState();
 
   const [isCameraReady, setCameraReady] = useState<boolean>(!useEyeTracking);
   const [isStarted, setStarted] = useState<boolean>(false);
-  const {catName} = useSaveState();
-
   const [faceState, setFaceState] = useState<IFaceState>({faceDetected: false, leftEyeOpen: false, rightEyeOpen: false});
-
   const [failed, setFailed] = useState<boolean>(false);
   const [safePeriod, setSafePeriod] = useState<boolean>(true);
 
   useEffect(() => {
-    if(safePeriod) return;
-    if(useEyeTracking && (!faceState.faceDetected || faceState.leftEyeOpen || faceState.rightEyeOpen)) {
+    if (safePeriod) return;
+    if (useEyeTracking && (!faceState.faceDetected || faceState.leftEyeOpen || faceState.rightEyeOpen)) {
       setFailed(true);
     }
-  }, [faceState]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [faceState, safePeriod, useEyeTracking]);
 
   const handleRetry = () => {
     setStarted(false);
@@ -41,7 +40,7 @@ export default function FocusingScreen() {
 
   return (
     <motion.main className={'focusing-screen'}
-                 transition={useCalmMode ? screenReducedTransiton : screenAnimTransition}
+                 transition={useCalmMode ? screenReducedTransition : screenAnimTransition}
                  initial={{opacity: 0, scale: 1.2}}
                  animate={{opacity: 1, scale: 1}}
                  exit={{opacity: 0, scale: 1.2}}>

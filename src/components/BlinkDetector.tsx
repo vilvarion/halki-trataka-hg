@@ -1,19 +1,23 @@
 import {useEffect, useRef, useState} from "react";
-import {useAnimationFrame} from "framer-motion"
+import {useAnimationFrame} from "framer-motion";
+import {FaceLandmarker, FilesetResolver} from '@mediapipe/tasks-vision';
+
 import {delay} from "../utils/animation";
-import {FaceLandmarker, FilesetResolver, DrawingUtils} from '@mediapipe/tasks-vision';
 import {webcamAllowed} from "../utils/browser";
 import detectBlink from "../utils/eyeDetection";
+import type {IFaceState} from "../types/global";
 import "./BlinkDetector.scss";
-import BlinkUI from "./BlinkUI";
-import {IFaceState} from "../types/global";
 
-export default function BlinkDetector ({onReady, onStateChange}: {onReady?: () => void, onStateChange?: (state: IFaceState) => void}) {
-  const streamRef = useRef<MediaStream|null>(null);
+interface BlinkDetectorProps {
+  onReady?: () => void;
+  onStateChange?: (state: IFaceState) => void;
+}
+
+export default function BlinkDetector({onReady, onStateChange}: BlinkDetectorProps) {
+  const streamRef = useRef<MediaStream | null>(null);
   const detectorRef = useRef<FaceLandmarker | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const time = useRef<number>(-1);
-  const [loading, setLoading] = useState(false);
+  const lastVideoTimeRef = useRef<number>(-1);
   const [ready, setReady] = useState(false);
 
   const [faceDetected, setFaceDetected] = useState(false);
@@ -23,21 +27,26 @@ export default function BlinkDetector ({onReady, onStateChange}: {onReady?: () =
 
 
   useEffect(() => {
+    const videoElement = videoRef.current;
+
     try {
-      if(webcamAllowed()) startVideo();
+      if (webcamAllowed()) startVideo();
     } catch (e) {
       console.error(e);
     }
+
     return () => {
       console.log("Closing BlinkDetector");
-      if(detectorRef.current)
+      if (detectorRef.current) {
         detectorRef.current.close();
-
+      }
       streamRef.current?.getTracks().forEach(track => track.stop());
       streamRef.current = null;
-      if(videoRef.current)
-        videoRef.current.srcObject = null;
-    }
+      if (videoElement) {
+        videoElement.srcObject = null;
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Starting the video stream
@@ -78,7 +87,6 @@ export default function BlinkDetector ({onReady, onStateChange}: {onReady?: () =
   // Loading the face detection model
   const startFaceDetection = async () => {
     await createFaceLandmarker();
-    setLoading(false);
     setReady(true);
     onReady && onReady();
   }
@@ -86,18 +94,18 @@ export default function BlinkDetector ({onReady, onStateChange}: {onReady?: () =
   const detectionLoop = async () => {
     if(ready && detectorRef.current && videoRef.current) {
       const video = videoRef.current;
-      const lastVideoTime = time.current;
+      const lastVideoTime = lastVideoTimeRef.current;
       const faceLandmarker = detectorRef.current;
 
       let startTimeMs = performance.now();
       if (lastVideoTime !== video.currentTime) {
-        time.current = video.currentTime;
+        lastVideoTimeRef.current = video.currentTime;
         const results = faceLandmarker.detectForVideo(video, startTimeMs);
 
         if(results && results.faceBlendshapes[0]) {
           if(!faceDetected) setFaceDetected(true);
 
-          const { blink, leftBlink, rightBlink} = detectBlink(results.faceBlendshapes[0]);
+          const {leftBlink, rightBlink} = detectBlink(results.faceBlendshapes[0]);
 
           if(leftEyeOpen !== leftBlink) setLeftEyeOpen(leftBlink);
           if(rightEyeOpen !== rightBlink) setRightEyeOpen(rightBlink);
