@@ -2,6 +2,8 @@
 
 ### Made by Vilvarion for HeathyGamer GG community Hackathon. MAYke-it 2024
 
+Halki is a Trataka (fixed-point gazing) meditation app for beginners. Users focus on an animated heart while following breathing cues, with optional webcam-based eye tracking to detect blinks. Built for the HealthyGamer GG MAYke-it 2024 Hackathon.
+
 ### Live demo: [https://halki.app](https://halki.app/)
 
 How to run on local:
